@@ -5,11 +5,14 @@
   "bin": {
     "create-lcu-package": "./bin/run"
   },
-  "bugs": "https://github.com/fathym/create-lcu-package/issues",
+  "bugs": {
+    "url": "https://github.com/fathym/create-lcu-package/issues"
+  },
   "dependencies": {
     "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^2.2.2"
+    "@oclif/plugin-plugins": "^2.2.2",
+    "listr2": "^5.0.7"
   },
   "devDependencies": {
     "@oclif/test": "^2.3.3",
@@ -45,10 +48,10 @@
   "oclif": {
     "bin": "create-lcu-package",
     "dirname": "create-lcu-package",
-    "commands": "./dist/commands",
+    "default": ".",
+    "commands": "./dist",
     "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
+      "@oclif/plugin-help"
     ],
     "topicSeparator": " ",
     "topics": {
@@ -57,12 +60,15 @@
       }
     }
   },
-  "repository": "fathym/create-lcu-package",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fathym/create-lcu-package.git"
+  },
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "deploy": "npx fathym git && npm version patch && npm run deploy:all && npm run deploy:refresh",
     "deploy:all": "npm publish --access public",
-    "deploy:refresh": "node -e \"setTimeout(()=>{},500)\" && npm run deploy:commit && npm i @fathym/cli@latest -g",
+    "deploy:refresh": "node -e \"setTimeout(()=>{},500)\" && npm run deploy:commit",
     "deploy:commit": "npx fathym git \"Deploy complete, syncing versions and readme updates\"",
     "create-lcu-package": "npm run build && \"./bin/run.cmd\"",
     "lint": "eslint . --ext .ts --config .eslintrc",
@@ -72,5 +78,12 @@
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "author": "",
+  "workspaces": [
+    "dist\\test"
+  ]
 }

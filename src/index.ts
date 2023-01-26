@@ -93,7 +93,7 @@ export default class CreateLCUPackage extends Command {
       {
         title: `Initializing directory ${directory} with default files.`,
         task: async () => {
-          if (!exists(directory!)) {
+          if (!(await exists(directory!))) {
             await mkdir(directory!);
           }
 
@@ -125,7 +125,7 @@ export default class CreateLCUPackage extends Command {
 
           const assetsDir = path.join(directory!, "assets");
 
-          if (!exists(assetsDir!)) {
+          if (!(await exists(assetsDir!))) {
             await mkdir(assetsDir!);
           }
 

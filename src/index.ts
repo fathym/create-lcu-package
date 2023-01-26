@@ -67,18 +67,16 @@ export default class CreateLCUPackage extends Command {
     "<%= config.bin %> <%= command.id %> dev lcu scaffold --help",
   ];
 
-  static flags = {
-    directory: Flags.string({
-      char: "d",
-      description: "The directory to initialize and scaffold.",
-      required: true,
-    }),
-  };
+  static flags = {};
 
   static args = {
     name: Args.string({
       description: "The name of the LCU package.",
       required: true,
+    }),
+    directory: Args.string({
+      description: "The directory to scaffold into.",
+      required: false,
     }),
   };
 
@@ -87,7 +85,7 @@ export default class CreateLCUPackage extends Command {
 
     const { name } = args;
 
-    let { directory } = flags;
+    let { directory } = args;
 
     directory = directory || "./";
 
@@ -95,42 +93,45 @@ export default class CreateLCUPackage extends Command {
       {
         title: `Initializing directory ${directory} with default files.`,
         task: async () => {
-          await mkdir(directory);
+          await mkdir(directory!);
 
           await withJson<any>(
-            path.join(directory, "package.json"),
+            path.join(directory!, "package.json"),
             async (val) => {
               return val || this.templatePackageJson(name);
             }
           );
 
-          await withFile(path.join(directory, "README.md"), async (val) => {
+          await withFile(path.join(directory!, "README.md"), async (val) => {
             return val || this.templateReadme(name);
           });
 
-          await withFile(path.join(directory, "LICENSE"), async (val) => {
+          await withFile(path.join(directory!, "LICENSE"), async (val) => {
             return val || this.templateLicense(name);
           });
         },
       },
       {
-        title: `Configuring ${directory} with default files.`,
+        title: `Configuring ${directory} with LCU files.`,
         task: async () => {
-          await withJson<any>(path.join(directory, "lcu.json"), async (val) => {
-            return val || this.templateLcuJson(name);
-          });
+          await withJson<any>(
+            path.join(directory!, "lcu.json"),
+            async (val) => {
+              return val || this.templateLcuJson(name);
+            }
+          );
 
-          await mkdir(path.join(directory, "assets"));
+          await mkdir(path.join(directory!, "assets"));
 
           await withJson<any>(
-            path.join(directory, "assets/eac.json"),
+            path.join(directory!, "assets/eac.json"),
             async (val) => {
               return val || this.templateEacJson(name);
             }
           );
 
           await withJson<any>(
-            path.join(directory, "assets/parameters.json"),
+            path.join(directory!, "assets/parameters.json"),
             async (val) => {
               return val || this.templateParametersJson(name);
             }

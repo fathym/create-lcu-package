@@ -93,7 +93,9 @@ export default class CreateLCUPackage extends Command {
       {
         title: `Initializing directory ${directory} with default files.`,
         task: async () => {
-          await mkdir(directory!);
+          if (!exists(directory!)) {
+            await mkdir(directory!);
+          }
 
           await withJson<any>(
             path.join(directory!, "package.json"),
@@ -121,17 +123,21 @@ export default class CreateLCUPackage extends Command {
             }
           );
 
-          await mkdir(path.join(directory!, "assets"));
+          const assetsDir = path.join(directory!, "assets");
+
+          if (!exists(assetsDir!)) {
+            await mkdir(assetsDir!);
+          }
 
           await withJson<any>(
-            path.join(directory!, "assets/eac.json"),
+            path.join(assetsDir!, "eac.json"),
             async (val) => {
               return val || this.templateEacJson(name);
             }
           );
 
           await withJson<any>(
-            path.join(directory!, "assets/parameters.json"),
+            path.join(assetsDir!, "parameters.json"),
             async (val) => {
               return val || this.templateParametersJson(name);
             }

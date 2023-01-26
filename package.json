@@ -1,0 +1,76 @@
+{
+  "name": "@fathym/create-lcu-package",
+  "description": "LCU Package scaffolding",
+  "version": "0.0.0",
+  "bin": {
+    "create-lcu-package": "./bin/run"
+  },
+  "bugs": "https://github.com/fathym/create-lcu-package/issues",
+  "dependencies": {
+    "@oclif/core": "^2",
+    "@oclif/plugin-help": "^5",
+    "@oclif/plugin-plugins": "^2.2.2"
+  },
+  "devDependencies": {
+    "@oclif/test": "^2.3.3",
+    "@types/chai": "^4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.18.11",
+    "chai": "^4",
+    "eslint": "^7.32.0",
+    "eslint-config-oclif": "^4",
+    "eslint-config-oclif-typescript": "^1.0.3",
+    "mocha": "^9",
+    "oclif": "^3",
+    "shx": "^0.3.3",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "/bin",
+    "/dist",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/fathym/create-lcu-package",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "oclif": {
+    "bin": "create-lcu-package",
+    "dirname": "create-lcu-package",
+    "commands": "./dist/commands",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins"
+    ],
+    "topicSeparator": " ",
+    "topics": {
+      "hello": {
+        "description": "Say hello to the world and others"
+      }
+    }
+  },
+  "repository": "fathym/create-lcu-package",
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "deploy": "npx fathym git && npm version patch && npm run deploy:all && npm run deploy:refresh",
+    "deploy:all": "npm publish --access public",
+    "deploy:refresh": "node -e \"setTimeout(()=>{},500)\" && npm run deploy:commit && npm i @fathym/cli@latest -g",
+    "deploy:commit": "npx fathym git \"Deploy complete, syncing versions and readme updates\"",
+    "create-lcu-package": "npm run build && \"./bin/run.cmd\"",
+    "lint": "eslint . --ext .ts --config .eslintrc",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "yarn lint",
+    "prepack": "yarn build && oclif manifest && oclif readme",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif readme && git add README.md"
+  },
+  "types": "dist/index.d.ts"
+}

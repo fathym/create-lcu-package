@@ -1,0 +1,33 @@
+{
+  "extends": ["oclif", "oclif-typescript"],
+  "rules": {
+    "arrow-parens": "off",
+    "camelcase": "off",
+    "comma-dangle": "off",
+    "indent": "off",
+    "keyword-spacing": "off",
+    "max-params": "off",
+    "new-cap": "off",
+    "no-implicit-coercion": "off",
+    "node/no-extraneous-import": "off",
+    "object-curly-spacing": ["error", "always"],
+    "operator-linebreak": "off",
+    "quotes": "off",
+    "semi": "off",
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "line": {
+          "markers": ["#region", "#endregion", "region", "endregion"]
+        }
+      }
+    ],
+    "unicorn/filename-case": "off",
+    "unicorn/no-array-for-each": "off",
+    "unicorn/new-for-builtins": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-empty-interfac": "off",
+    "@typescript-eslint/no-unused-vars": "off"
+  }
+}

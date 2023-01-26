@@ -22,7 +22,7 @@ $ npm install -g @fathym/create-lcu-package
 $ create-lcu-package COMMAND
 running command...
 $ create-lcu-package (--version)
-@fathym/create-lcu-package/0.0.3 win32-x64 node-v18.12.1
+@fathym/create-lcu-package/0.0.4 win32-x64 node-v18.12.1
 $ create-lcu-package --help [COMMAND]
 USAGE
   $ create-lcu-package COMMAND
@@ -33,22 +33,20 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`create-lcu-package NAME`](#create-lcu-package-name)
+* [`create-lcu-package NAME [DIRECTORY]`](#create-lcu-package-name-directory)
 * [`create-lcu-package help [COMMANDS]`](#create-lcu-package-help-commands)
 
-## `create-lcu-package NAME`
+## `create-lcu-package NAME [DIRECTORY]`
 
 Used to scaffold a new LLCU package
 
 ```
 USAGE
-  $ create-lcu-package [NAME] -d <value>
+  $ create-lcu-package [NAME] [DIRECTORY]
 
 ARGUMENTS
-  NAME  The name of the LCU package.
-
-FLAGS
-  -d, --directory=<value>  (required) The directory to initialize and scaffold.
+  NAME       The name of the LCU package.
+  DIRECTORY  The directory to scaffold into.
 
 DESCRIPTION
   Used to scaffold a new LLCU package
@@ -57,7 +55,7 @@ EXAMPLES
   $ create-lcu-package  dev lcu scaffold --help
 ```
 
-_See code: [dist/index.ts](https://github.com/fathym/create-lcu-package/blob/v0.0.3/dist/index.ts)_
+_See code: [dist/index.ts](https://github.com/fathym/create-lcu-package/blob/v0.0.4/dist/index.ts)_
 
 ## `create-lcu-package help [COMMANDS]`
 

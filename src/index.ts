@@ -231,7 +231,7 @@ SOFTWARE.
       main: "lcu.json",
       scripts: {
         deploy:
-          "npx fathym git && npm version patch && npm publish --access public",
+          "npx fathym git && npm version patch && npm publish --access public && npx fathym git",
       },
       keywords: ["lowcodeunit", "lcu"],
       license: "MIT",

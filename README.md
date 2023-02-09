@@ -22,7 +22,7 @@ $ npm install -g @fathym/create-lcu-package
 $ create-lcu-package COMMAND
 running command...
 $ create-lcu-package (--version)
-@fathym/create-lcu-package/0.0.8 win32-x64 node-v18.12.1
+@fathym/create-lcu-package/0.0.9 win32-x64 node-v18.12.1
 $ create-lcu-package --help [COMMAND]
 USAGE
   $ create-lcu-package COMMAND
@@ -55,7 +55,7 @@ EXAMPLES
   $ create-lcu-package  dev lcu scaffold --help
 ```
 
-_See code: [dist/index.ts](https://github.com/fathym/create-lcu-package/blob/v0.0.8/dist/index.ts)_
+_See code: [dist/index.ts](https://github.com/fathym/create-lcu-package/blob/v0.0.9/dist/index.ts)_
 
 ## `create-lcu-package help [COMMANDS]`
 

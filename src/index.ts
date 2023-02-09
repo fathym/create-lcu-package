@@ -212,13 +212,9 @@ SOFTWARE.
       Package: {
         Name: name,
         Description: `An LCU for installing ${name}.`,
-        Button: "Launch",
         Image: "https://www.fathym.com/assets/images/logo.png",
         PreviewImage: "https://www.fathym.com/assets/images/logo.png",
-        SuccessType: "Project",
       },
-      EaC: "./assets/eac.json",
-      Parameters: "./assets/parameters.json",
     };
   }
 

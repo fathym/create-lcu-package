@@ -183,24 +183,37 @@ SOFTWARE.
   protected templateEacJson(name: string): any {
     return {
       Applications: {
-        $1: {
-          Application: {
+        "{{guid '$1'}}": {
+          Details: {
             Description:
-              "An application for hosting the files fromthe NPM package '{{NPM_PACKAGE}}'",
+              "An application for hosting the files from the NPM package '{{NPM_PACKAGE}}'",
             Name: "NPM Package Deploy: {{NPM_PACKAGE}}",
           },
           LookupConfig: {
-            PathRegex: "/packages/{{NPM_PACKAGE}}.*",
+            PathRegex: "/{{PACKAGE_ROUTE}}.*",
           },
-          LowCodeUnit: {
-            Package: "{{NPM_PACKAGE}}",
-            Version: "{{PACKAGE_VERSION}}",
-            Type: "NPM",
+          Package: {
+            Details: {
+              Package: "{{NPM_PACKAGE}}",
+              Version: "{{PACKAGE_VERSION}}",
+            },
+            Type: "NPMLowCodeUnit",
           },
           Processor: {
-            BaseHref: "/packages/{{NPM_PACKAGE}}/",
-            DefaultFile: "index.html",
-            Type: "DFS",
+            Details: {
+              BaseHref: "/{{PACKAGE_ROUTE}}/",
+              DefaultFile: "index.html",
+            },
+            Type: "DFSProcessor",
+          },
+        },
+      },
+      Projects: {
+        "{{PROJECT_LOOKUP}}": {
+          ApplicationLookups: ["{{guid '$1'}}"],
+          Details: {
+            Name: "{{Package.Details.Name}}",
+            Description: "{{Package.Details.Description}}",
           },
         },
       },
@@ -214,6 +227,19 @@ SOFTWARE.
         Description: `An LCU for installing ${name}.`,
         Image: "https://www.fathym.com/assets/images/logo.png",
         PreviewImage: "https://www.fathym.com/assets/images/logo.png",
+      },
+      Configurations: {
+        Basic: {
+          Name: "Basic NPM Package Deploy",
+          Description: "A simple NPM package deployment.",
+          Phases: [
+            {
+              Name: "Deploy NPM Package",
+              Order: 1,
+              Asset: "deploy",
+            },
+          ],
+        },
       },
     };
   }
@@ -236,20 +262,48 @@ SOFTWARE.
 
   protected templateParametersJson(name: string): any {
     return {
+      PROJECT_LOOKUP: {
+        Order: 1,
+        Prompts: [
+          {
+            Type: "eac:projects|select",
+            Message: "Choose the project to deploy the package to?",
+            Arguments: {
+              CreateText: "Create a project",
+            },
+          },
+        ],
+      },
       NPM_PACKAGE: {
-        type: "input",
-        message: "Enter the NPM package name:",
+        Order: 2,
+        Prompts: [
+          {
+            Message: "Enter the NPM package name:",
+          },
+        ],
       },
       PACKAGE_VERSION: {
-        type: "input",
-        message: "Enter the NPM package version to use:",
+        Order: 2,
+        Prompts: [
+          {
+            Message: "Enter the NPM package version to use:",
+          },
+        ],
+      },
+      PACKAGE_ROUTE: {
+        Order: 2,
+        Prompts: [
+          {
+            Message: "Enter the route to run the package on:",
+          },
+        ],
       },
     };
   }
 
   protected templateReadme(name: string): string {
     return `# ${name}
-The LowCodeUnit definition for creating a ${name} project.
+The LCU Package definition for creating a ${name} project.
     `;
   }
 }

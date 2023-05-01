@@ -1,7 +1,7 @@
 {
   "name": "@fathym/create-lcu-package",
   "description": "LCU Package scaffolding",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "bin": {
     "create-lcu-package": "./bin/run"
   },

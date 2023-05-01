@@ -183,7 +183,7 @@ SOFTWARE.
   protected templateEacJson(name: string): any {
     return {
       Applications: {
-        "{{guid '$1'}}": {
+        "{{$1}}": {
           Details: {
             Description:
               "An application for hosting the files from the NPM package '{{NPM_PACKAGE}}'",
@@ -210,7 +210,7 @@ SOFTWARE.
       },
       Projects: {
         "{{PROJECT_LOOKUP}}": {
-          ApplicationLookups: ["{{guid '$1'}}"],
+          ApplicationLookups: ["{{$1}}"],
           Details: {
             Name: "{{Package.Details.Name}}",
             Description: "{{Package.Details.Description}}",

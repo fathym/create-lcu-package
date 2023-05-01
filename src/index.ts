@@ -123,7 +123,7 @@ export default class CreateLCUPackage extends Command {
             }
           );
 
-          const assetsDir = path.join(directory!, "assets");
+          const assetsDir = path.join(directory!, "assets", "deploy");
 
           if (!(await exists(assetsDir!))) {
             await mkdir(assetsDir!);
